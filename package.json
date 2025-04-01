@@ -1,0 +1,20 @@
+{
+  "name": "user-service",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.x",
+    "dotenv": "^16.x",
+    "ejs": "^3.x",
+    "body-parser": "^1.x",
+    "jsonwebtoken": "^9.x",
+    "axios": "^1.x"
+  },
+  "devDependencies": {
+    "nodemon": "^3.x"
+  }
+}
