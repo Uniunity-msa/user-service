@@ -2,5 +2,5 @@
 
 exports.login = (req, res) => {
 
-    return res.render("login");
+    return res.render("login.html");
   };

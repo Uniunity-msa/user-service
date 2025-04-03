@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // 라우터 등록
 app.use("/auth", require("./src/routes/authRoutes")); 
+app.use("/user", require("./src/routes/userRoutes")); 
 
 
 module.exports = app;
