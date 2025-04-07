@@ -7,12 +7,16 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
-    "express": "^4.x",
+    "@kubernetes/client-node": "^1.1.1",
+    "axios": "^1.x",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.x",
     "dotenv": "^16.x",
     "ejs": "^3.x",
-    "body-parser": "^1.x",
+    "express": "^4.x",
+    "googleapis": "^148.0.0",
     "jsonwebtoken": "^9.x",
-    "axios": "^1.x"
+    "mysql2": "^3.14.0"
   },
   "devDependencies": {
     "nodemon": "^3.x"
