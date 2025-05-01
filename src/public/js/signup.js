@@ -378,21 +378,21 @@ sendAuthEmailBtn.addEventListener('click', sendAuthEmail);
 function compareAuthenticationCode() {
     const authenticationInputText = document.getElementById('authenticationInputText').value;
 
-    // 이메일 인증 설정 후 여기 주석 해제하기 
-        confirmAuthEmailBtn.disabled=true;
-        sendAuthEmailBtn.disabled=true;
-        emailAuthChecked=true;
-    // if (authenticationInputText === authenticationCode) {
-    //     // 인증번호가 일치하는 경우의 동작을 수행합니다.
-    //     alert('인증이 확인되었습니다.');
+    // // 이메일 인증 설정 후 여기 주석 해제하기 
     //     confirmAuthEmailBtn.disabled=true;
     //     sendAuthEmailBtn.disabled=true;
     //     emailAuthChecked=true;
+    if (authenticationInputText === authenticationCode) {
+        // 인증번호가 일치하는 경우의 동작을 수행합니다.
+        alert('인증이 확인되었습니다.');
+        confirmAuthEmailBtn.disabled=true;
+        sendAuthEmailBtn.disabled=true;
+        emailAuthChecked=true;
 
-    // } else {
-    //     // 인증번호가 일치하지 않는 경우의 동작을 수행합니다.
-    //     alert('인증번호가 일치하지 않습니다. 인증번호를 다시 입력해주세요.');
-    // }
+    } else {
+        // 인증번호가 일치하지 않는 경우의 동작을 수행합니다.
+        alert('인증번호가 일치하지 않습니다. 인증번호를 다시 입력해주세요.');
+    }
 }
 confirmAuthEmailBtn.addEventListener('click', compareAuthenticationCode);
 

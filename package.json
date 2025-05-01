@@ -16,7 +16,8 @@
     "express": "^4.x",
     "googleapis": "^148.0.0",
     "jsonwebtoken": "^9.x",
-    "mysql2": "^3.14.0"
+    "mysql2": "^3.14.0",
+    "nodemailer": "^6.10.1"
   },
   "devDependencies": {
     "nodemon": "^3.x"
