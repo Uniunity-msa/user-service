@@ -4,7 +4,7 @@ class UserStorage {
     //id를 통해 유저 정보 갖고 오기
     static getUserInfo(user_email) {
         return new Promise(async (resolve, reject) => {
-            const query = "SELECT * FROM User WHERE user_email =?;";
+            const query = "SELECT * FROM user WHERE user_email =?;";
             pool.query(query, [user_email], (err, data) => {
                 if (err) reject(`${err}`);
                 else {

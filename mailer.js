@@ -6,7 +6,7 @@ const SCOPES = [
   'https://mail.google.com/',
   'https://www.googleapis.com/auth/gmail.send',
 ];
-const TOKEN_PATH = '../app/config/mail_token.json';
+const TOKEN_PATH = './src/config/mail_token.json';
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -99,7 +99,7 @@ function getNewToken(oAuth2Client, callback, emailAddress) {
 
 async function sendEmailWithAuthorization(emailAddress) {
   return new Promise((resolve, reject) => {
-    fs.readFile('../app/config/mail_credentials.json', (err, content) => {
+    fs.readFile('./src/config/mail_credentials.json', (err, content) => {
       if (err) {
         console.log('Error loading client secret file:', err);
         reject(err);
@@ -112,3 +112,11 @@ async function sendEmailWithAuthorization(emailAddress) {
 }
 
 module.exports=sendEmailWithAuthorization;
+
+
+if (require.main === module) {
+  // 여기에 테스트용 이메일 주소를 적어줘
+  sendEmailWithAuthorization('20221077@sungshin.ac.kr')
+    .then(code => console.log('✅ 인증 코드 전송 성공:', code))
+    .catch(err => console.error('❌ 에러 발생:', err));
+}

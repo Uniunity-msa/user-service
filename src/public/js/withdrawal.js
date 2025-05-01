@@ -25,7 +25,7 @@ const fetchWithdrawalUser = async (event) => {
       psword: pwdElement.value
     }
 
-    await fetch(`${apiUrl}/mypage/withdrawal`, {
+    await fetch(`${apiUrl}/user/withdrawal`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
