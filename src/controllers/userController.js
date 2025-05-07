@@ -1,4 +1,6 @@
-
+const User = require("../models/user");
+const sendEmailWithAuthorization = require("../../mailer");
+const bcrypt = require('bcrypt');
 
 //agreement
 exports.agreement = (req, res) => {
@@ -6,28 +8,128 @@ exports.agreement = (req, res) => {
     return res.render("agreement.html");
 };
 
-
+// 회원가입
 exports.signup = (req, res) => {
 
     return res.render("signup.html");
 };
 
-exports.forgotpassword = (req, res) => {
+// 이메일 중복 확인
+exports.duplicateCheckEmail = async (req, res) => {
+    const user = new User({
+        user_email: req.body.user_email
+    })
+    const response = await user.duplicateCheckEmail();
+    return res.json(response)
+    
+};
+
+// 이메일 코드 인증
+exports.emailAuth = async (req, res) => {
+    const emailAdderess = req.body.email;
+
+    sendEmailWithAuthorization(emailAdderess)
+        .then((authentication_code) => {
+            return res.json({
+                "status": 201,
+                "authentication_code": authentication_code
+            })
+        })
+        .catch((err) => {
+            console.error('An error occurred:', err);
+            return res.json({
+                "status": 500,
+                "err": err
+            }
+            );
+        });
+}
+
+// 회원 정보 저장
+exports.register = async (req, res) => {
+
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.psword, 10)
+        const user = new User({
+            user_email: req.body.user_email,
+            psword: hashedPassword,
+            user_name: req.body.user_name,
+            user_type: req.body.user_type,
+            user_nickname: req.body.user_nickname,
+            university_id: req.body.university_id,
+            user_marketing: req.body.user_marketing,
+        });
+        const response = await user.register();
+        return res.json(response)
+    } catch (err) {
+        return res.json(err)
+    }
+}
+
+
+
+exports.forgotpasswordPage = (req, res) => {
 
     return res.render("forgotpassword.html");
 };
+exports.forgotpassword = async (req, res) => {
+    const hashedPassword = await bcrypt.hash(req.body.new_psword, 10)
+    const user = new User({
+        user_email: req.body.user_email,
+        new_psword: hashedPassword
+    });
+    const response = await user.modifyPsword2();
+    return res.json(response)
 
-exports.modifyNickname = (req, res) => {
-
-    return res.render("modifyNickname.html");
 };
 
-exports.modifyPassword = (req, res) => {
+
+exports.modifyPasswordPage = (req, res) => {
 
     return res.render("modifyPassword.html");
 };
+exports.modifyPassword = async (req, res) => {
+    const hashedPassword = await bcrypt.hash(req.body.new_psword, 10)
+        const user = new User({
+            user_email: req.body.user_email,
+            new_psword: hashedPassword,
+            psword: req.body.psword
+        });
+        const response = await user.modifyPsword1();
+        return res.json(response)
+};
 
-exports.withdrawal = (req, res) => {
+
+
+exports.modifyNicknamePage = (req, res) => {
+
+    return res.render("modifyNickname.html");
+};
+exports.modifyNickname = async (req, res) => {
+    const user = new User({
+        user_email: req.body.user_email,
+        user_nickname: req.body.user_nickname,
+    });
+    const response = await user.modifyNickname();
+    return res.json(response)
+};
+
+
+
+exports.withdrawalPage = (req, res) => {
 
     return res.render("withdrawal.html");
+};
+exports.withdrawal = async (req, res) => {
+
+    const user = new User({
+        user_email: req.body.user_email,
+        psword: req.body.psword,
+    });
+    const response = await user.withdrawalUser();
+
+    req.logout(function (err) {
+        if (err) { return next(err); }
+        return res.json(response)
+    });
 };

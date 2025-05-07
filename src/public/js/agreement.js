@@ -39,7 +39,7 @@ nextButton.addEventListener("click", function () {
     if (!allChecked) {
         if(!isCheckedMarketing){
              // 페이지 이동할 URL
-             const signupURL = `${apiUrl}/signup/0`;
+             const signupURL = `${apiUrl}/user/signup/0`; // 마케팅 수신 거부부
              // 페이지 이동
              window.location.href = signupURL;
         }else{
@@ -49,7 +49,7 @@ nextButton.addEventListener("click", function () {
     
     else {
         // 페이지 이동할 URL
-        const signupURL = `${apiUrl}/signup/1`;
+        const signupURL = `${apiUrl}/user/signup/1`; // 마케팅 수신 동의
         // 페이지 이동
         window.location.href = signupURL;
     }

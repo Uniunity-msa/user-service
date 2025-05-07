@@ -37,7 +37,7 @@ const relContainer = document.querySelector(".rel_search");
 
 var universitySearchList = [];
 const loadData = async() => {
-    const url = `${apiUrl}/showUniversityNameList`;
+    const url = `${apiUrl}/university/findAllUniversityName`;
     await fetch(url,{
         headers:{
             'Cookie': `connect.sid=${document.cookie}` // connect.sid 쿠키를 요청 헤더에 포함
@@ -259,7 +259,7 @@ function duplicateCheckEmail(){
         user_email: `${emailElement.value}${selectedEmailDomain}`
     };
 
-    fetch(`${apiUrl}/signup/duplicateCheckEmail`, {
+    fetch(`${apiUrl}/user/duplicateCheckEmail`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -352,7 +352,7 @@ function sendAuthEmail() {
         email: `${emailElement.value}${selectedEmailDomain}`
     };
 
-    fetch(`${apiUrl}/auth/email`, {
+    fetch(`${apiUrl}/user/emailAuth`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -378,6 +378,10 @@ sendAuthEmailBtn.addEventListener('click', sendAuthEmail);
 function compareAuthenticationCode() {
     const authenticationInputText = document.getElementById('authenticationInputText').value;
 
+    // // 이메일 인증 설정 후 여기 주석 해제하기 
+    //     confirmAuthEmailBtn.disabled=true;
+    //     sendAuthEmailBtn.disabled=true;
+    //     emailAuthChecked=true;
     if (authenticationInputText === authenticationCode) {
         // 인증번호가 일치하는 경우의 동작을 수행합니다.
         alert('인증이 확인되었습니다.');
@@ -433,7 +437,7 @@ function register() {
             user_marketing:isCheckedMarketing
         };
     
-        fetch(`${apiUrl}/register`, {
+        fetch(`${apiUrl}/user/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -444,7 +448,7 @@ function register() {
         .then(res => {
             if (res.status === 201) {
               alert("회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.")
-              window.location.href = "/login"; // 리다이렉션 처리
+              window.location.href = "/auth/login"; // 리다이렉션 처리
             } else {
               alert("서버의 문제로 회원가입에 실패했습니다. 다시 시도해주세요.");
             }
@@ -458,15 +462,3 @@ function register() {
 }
 registerBtn.addEventListener('click',register);
 
-
-
-
-
-
-
-
-
-// //mainpage 로드 후 loadData()실행
-// window.addEventListener('DOMContentLoaded', function () {
-//     loadData();
-// });
