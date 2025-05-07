@@ -10,7 +10,7 @@ class UniversityStorage {
                     console.error('MySQL 연결 오류: ', err);
                     reject(err)
                 }
-                const query = "SELECT university_name FROM University WHERE university_id =?;";
+                const query = "SELECT university_name FROM university WHERE university_id =?;";
                 pool.query(query, [university_id], (err, data) => {
                     connection.release();
                     if (err) reject(`${err}`);
@@ -31,7 +31,7 @@ class UniversityStorage {
                     console.error('MySQL 연결 오류: ', err);
                     reject(err)
                 }
-                const query = "SELECT university_url FROM University WHERE university_id =?;";
+                const query = "SELECT university_url FROM university WHERE university_id =?;";
                 pool.query(query, [university_id], (err, data) => {
                     connection.release();
                     if (err) reject(`${err}`);
@@ -53,7 +53,7 @@ class UniversityStorage {
                     reject(err)
                 }
 
-                pool.query("SELECT university_name,university_url,university_id FROM University ORDER BY university_name ASC;", function (err, rows, fields) {
+                pool.query("SELECT university_name,university_url,university_id FROM university ORDER BY university_name ASC;", function (err, rows, fields) {
                     pool.releaseConnection(connection);
                     if (err) {
                         console.error('Query 함수 오류', err);
