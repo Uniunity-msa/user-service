@@ -2,7 +2,7 @@ const dbConnector = require('./dbConnector');
 const mysql = require('mysql2/promise');
 
 // Kubernetes로부터 DB 접속정보 로드
-dbConnector.getDatabasePool();
+//dbConnector.getDatabasePool();
 
 // 연결 풀 생성
 const pool = mysql.createPool({
