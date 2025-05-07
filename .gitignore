@@ -1,3 +1,6 @@
 # .gitignore
 node_modules/
 .env
+
+src/config/mail_credentials.json
+src/config/mail_token.json
