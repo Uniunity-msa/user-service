@@ -157,11 +157,63 @@ class User {
     }
 
 
-    //비밀번호 찾기
+    //refresh토큰 저장
+    async saveRefreshToken(user_email, token, expiresAt) {
+        try {
 
+            const response = await UserStorage.saveRefreshToken(user_email, token, expiresAt);
+            return response;
+        } catch (err) {
+            return {
+                result: false,
+                status: 400,
+                err: err
+            };
+        }
+    }
 
+    // 토큰으로 조회
+  async getRefreshTokenByToken(token) {
+    try {
+      const tokenInfo = await UserStorage.getRefreshTokenByToken(token);
+      return tokenInfo;
+    } catch (err) {
+      return {
+        result: false,
+        status: 400,
+        err: err
+      };
+    }
+  }
 
+  // 이메일로 조회
+  async getRefreshTokenByEmail(email) {
+    try {
+      const tokenInfo = await UserStorage.getRefreshTokenByEmail(email);
+      return tokenInfo;
+    } catch (err) {
+      return {
+        result: false,
+        status: 400,
+        err: err
+      };
+    }
+  }
 
+  // 로그아웃용 토큰 삭제
+  async deleteRefreshToken(token) {
+    try {
+      const result = await UserStorage.deleteRefreshToken(token);
+      return result;
+    } catch (err) {
+      return {
+        result: false,
+        status: 400,
+        err: err
+      };
+    }
+  }
 }
+
 
 module.exports = User

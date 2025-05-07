@@ -48,6 +48,36 @@ class UserStorage {
 
 
     }
+    //리프레시토큰 저장
+    static saveRefreshToken(user_email, token, expiresAt) {
+        return new Promise(async (resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err) {
+                    console.error('MySQL 연결 오류: ', err);
+                    reject(err)
+                }
+                const query = "INSERT INTO refresh_token(user_email,refresh_token,expires_at) VALUES (?,?,?);";
+                pool.query(query, [
+                    user_email,
+                    token,
+                    expiresAt
+                ],
+                    (err) => {
+                        pool.releaseConnection(connection);
+                        if (err) reject({
+                            result: false,
+                            status: 500,
+                            err: `${err}`
+                        });
+                        else resolve({ result: true, status: 201 });
+                    })
+            });
+
+        });
+
+
+
+    }
     //닉네임 변경
     static updateNickname(userInfo) {
         return new Promise(async (resolve, reject) => {
@@ -209,5 +239,77 @@ class UserStorage {
         });
 
     }
+
+
+   // 리프레시 토큰으로 조회
+    static getRefreshTokenByToken(token) {
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err) {
+                    console.error("MySQL 연결 오류: ", err);
+                    reject(err);
+                    return;
+                }
+
+                const query = "SELECT * FROM refresh_token WHERE refresh_token = ?";
+                pool.query(query, [token], (err, data) => {
+                    pool.releaseConnection(connection);
+                    if (err) {
+                        reject(`${err}`);
+                    } else {
+                        resolve(data[0]); // 단일 토큰 결과 반환
+                    }
+                });
+            });
+        });
+    }
+
+    // 유저 이메일로 토큰 조회
+    static getRefreshTokenByEmail(email) {
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err) {
+                    console.error("MySQL 연결 오류: ", err);
+                    reject(err);
+                    return;
+                }
+
+                const query = "SELECT * FROM refresh_token WHERE user_email = ?";
+                pool.query(query, [email], (err, data) => {
+                    pool.releaseConnection(connection);
+                    if (err) {
+                        reject(`${err}`);
+                    } else {
+                        resolve(data); // 여러 개일 수 있음
+                    }
+                });
+            });
+        });
+    }
+
+    // 토큰 삭제
+    static deleteRefreshToken(token) {
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err) {
+                    console.error("MySQL 연결 오류: ", err);
+                    reject(err);
+                    return;
+                }
+
+                const query = "DELETE FROM refresh_token WHERE refresh_token = ?";
+                pool.query(query, [token], (err, result) => {
+                    pool.releaseConnection(connection);
+                    if (err) {
+                        reject(`${err}`);
+                    } else {
+                        resolve({ result: true, status: 200 });
+                    }
+                });
+            });
+        });
+    }
+
+
 }
 module.exports = UserStorage;
