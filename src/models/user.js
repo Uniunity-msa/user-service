@@ -213,6 +213,18 @@ class User {
       };
     }
   }
+
+  async deleteRefreshTokenByEmail(email) {
+    try {
+    return await UserStorage.deleteRefreshTokenByEmail(email);
+    } catch (err) {
+    return {
+        result: false,
+        status: 400,
+        err: err
+    };
+    }
+}
 }
 
 

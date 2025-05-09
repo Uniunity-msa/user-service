@@ -89,14 +89,16 @@ exports.modifyPasswordPage = (req, res) => {
     return res.render("modifyPassword.html");
 };
 exports.modifyPassword = async (req, res) => {
+    console.log("🔍 비밀번호 변경 요청 바디:", req.body);
+
     const hashedPassword = await bcrypt.hash(req.body.new_psword, 10)
-        const user = new User({
-            user_email: req.body.user_email,
-            new_psword: hashedPassword,
-            psword: req.body.psword
-        });
-        const response = await user.modifyPsword1();
-        return res.json(response)
+    const user = new User({
+        user_email: req.body.user_email,
+        new_psword: hashedPassword,
+        psword: req.body.psword
+    });
+    const response = await user.modifyPsword1();
+    return res.json(response)
 };
 
 
@@ -126,10 +128,10 @@ exports.withdrawal = async (req, res) => {
         user_email: req.body.user_email,
         psword: req.body.psword,
     });
-    const response = await user.withdrawalUser();
+    const response = await user.withdrawalUser(); // 1. 회원 삭제
 
-    req.logout(function (err) {
-        if (err) { return next(err); }
-        return res.json(response)
-    });
+    // 2. 해당 유저의 모든 Refresh Token 삭제
+    await user.deleteRefreshTokenByEmail(req.body.user_email);
+
+    return res.json({ ...response, message: "회원 탈퇴 및 토큰 삭제 완료" });
 };

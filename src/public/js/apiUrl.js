@@ -1,2 +1,4 @@
-const PORT = process.env.PORT || 8080;
-const apiUrl = `http://localhost:${PORT}`;
+// const PORT = process.env.PORT || 8080;
+// const apiUrl = `http://localhost:${PORT}`;
+
+const apiUrl = "";
