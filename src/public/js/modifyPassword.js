@@ -1,6 +1,8 @@
 
+let userInfo; // 유저정보
+
 // 작성자 회원 정보 불러오기
-const loadLoginData = async () => {
+const loadloginData = async () => {
   const res = await fetch("/auth/me", {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -13,12 +15,8 @@ const loadLoginData = async () => {
     localStorage.setItem("accessToken", newAccessToken);
   }
 
-  const userInfo = await res.json();
-  console.log("userInfo:", userInfo);
-  // 전역 userInfo가 있다면 여기에 할당 필요
-  window.userInfo = userInfo;
+  userInfo = await res.json();
 };
-
 
 //유효한 비밀번호 확인
 function validatePassword(password) {
@@ -106,7 +104,7 @@ const fetchChangePsword = async (event) => {
 
 // 페이지 로드 후 실행
 window.addEventListener('DOMContentLoaded', function () {
-    loadLoginData();
+    loadloginData();
 
 });
 

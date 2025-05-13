@@ -1,14 +1,20 @@
 let userInfo; // 유저정보
 
 // 작성자 회원 정보 불러오기
-const loadloginData = () => {
-  const url = `${apiUrl}/loginStatus`;
-  fetch(url)
-    .then((res) => res.json())
-    .then((res) => {
-      userInfo = res;
+const loadloginData = async () => {
+  const res = await fetch("/auth/me", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      "x-refresh-token": localStorage.getItem("refreshToken")
+    }
+  });
 
-    })
+  const newAccessToken = res.headers.get("x-access-token");
+  if (newAccessToken) {
+    localStorage.setItem("accessToken", newAccessToken);
+  }
+
+  userInfo = await res.json();
 };
 
 const fetchWithdrawalUser = async (event) => {
