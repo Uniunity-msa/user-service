@@ -48,6 +48,8 @@ exports.emailAuth = async (req, res) => {
 // 회원 정보 저장
 exports.register = async (req, res) => {
 
+    console.log(req.body);
+
     try {
         const hashedPassword = await bcrypt.hash(req.body.psword, 10)
         const user = new User({

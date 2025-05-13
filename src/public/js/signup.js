@@ -36,24 +36,20 @@ const searchInput = document.querySelector(".search_input");
 const relContainer = document.querySelector(".rel_search");
 
 var universitySearchList = [];
-const loadData = async() => {
-    const url = `${apiUrl}/university/findAllUniversityName`;
-    await fetch(url,{
-        headers:{
-            'Cookie': `connect.sid=${document.cookie}` // connect.sid 쿠키를 요청 헤더에 포함
-        }
+const loadData = async () => {
+  const url = `${apiUrl}/university/findAllUniversityName`;
+  await fetch(url)
+    .then((res) => res.json())
+    .then(res => {
+      if (res.success === true) {
+        searchUniversityName(res.result);
+      } else {
+        // alert("서버 오류로 점검 중입니다. 잠시 후 이용해주세요.");
+      }
     })
-        .then((res) => res.json())
-        .then(res => {
-            if(res.success==true){
-                searchUniversityName(res.result);
-            }
-            else{
-                // ul.appendChild("서버 오류로 점검 중 입니다. 잠시 후 이용해주세요");
-            }
-         
-        }
-    )
+    .catch(err => {
+      console.error("Error fetching university list:", err);
+    });
 }
 
 const searchUniversityName = (suggestArr) => {
@@ -436,7 +432,9 @@ function register() {
             university_id:universityIdMap.get(selectedValue),
             user_marketing:isCheckedMarketing
         };
-    
+        console.log(req);
+        
+        
         fetch(`${apiUrl}/user/register`, {
             method: "POST",
             headers: {
