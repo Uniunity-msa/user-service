@@ -357,7 +357,7 @@ function sendAuthEmail() {
     })
         .then((res) => res.json())
         .then(res => {
-            if (res.status = 201) {
+            if (res.status = 200) {
                 alert("인증코드를 발송하였습니다. 인증코드를 입력해주세요.")
                 authenticationCode = res.authentication_code;
             } else {
@@ -433,7 +433,7 @@ function register() {
             user_marketing:isCheckedMarketing
         };
         console.log(req);
-        
+
         
         fetch(`${apiUrl}/user/register`, {
             method: "POST",
@@ -444,7 +444,7 @@ function register() {
         })
         .then((res) => res.json())
         .then(res => {
-            if (res.status === 201) {
+            if (res.status === 200) {
               alert("회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.")
               window.location.href = "/auth/login"; // 리다이렉션 처리
             } else {

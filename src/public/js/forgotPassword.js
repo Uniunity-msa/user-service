@@ -71,7 +71,7 @@ function sendAuthEmail() {
     })
         .then((res) => res.json())
         .then(res => {
-            if (res.status = 201) {
+            if (res.status = 200) {
                 authenticationCode = res.authentication_code;
             } else {
                 console.error("Error", res.err);

@@ -31,7 +31,7 @@ exports.emailAuth = async (req, res) => {
     sendEmailWithAuthorization(emailAdderess)
         .then((authentication_code) => {
             return res.json({
-                "status": 201,
+                "status": 200,
                 "authentication_code": authentication_code
             })
         })
