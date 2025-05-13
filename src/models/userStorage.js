@@ -22,7 +22,7 @@ class UserStorage {
                     console.error('MySQL 연결 오류: ', err);
                     reject(err)
                 }
-                const query = "INSERT INTO User(user_email,user_name,psword,user_type,user_nickname,university_id,user_marketing) VALUES (?,?,?,?,?,?,?);";
+                const query = "INSERT INTO user(user_email,user_name,psword,user_type,user_nickname,university_id,user_marketing) VALUES (?,?,?,?,?,?,?);";
                 pool.query(query, [
                     userInfo.user_email,
                     userInfo.user_name,
@@ -86,7 +86,7 @@ class UserStorage {
                     console.error('MySQL 연결 오류: ', err);
                     reject(err)
                 }
-                const query = "UPDATE User SET user_nickname=? WHERE user_email=?;";
+                const query = "UPDATE user SET user_nickname=? WHERE user_email=?;";
                 pool.query(query, [
                     userInfo.user_nickname,
                     userInfo.user_email
@@ -115,7 +115,7 @@ class UserStorage {
                     reject(err)
                 }
 
-                const query = "UPDATE User SET psword=? WHERE user_email=?;";
+                const query = "UPDATE user SET psword=? WHERE user_email=?;";
 
                 pool.query(query, [
                     userInfo.new_psword,
