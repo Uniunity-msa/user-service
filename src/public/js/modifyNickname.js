@@ -30,6 +30,8 @@ const fetchChangeNickname = async (event) => {
       user_nickname: nicknameElement.value
     }
 
+    console.log(req);
+
     await fetch(`${apiUrl}/user/modify/nickname`, {
       method: "POST",
       headers: {

@@ -57,8 +57,7 @@ const fetchWithdrawalUser = async (event) => {
 
 
 // 페이지 로드 후 실행
-window.addEventListener('DOMContentLoaded', function () {
-  loadloginData();
-
+window.addEventListener('DOMContentLoaded', async function () {
+  await loadloginData();
 });
 

@@ -177,7 +177,7 @@ const fetchChangePsword = async (event) => {
             .then(res => {
                 if (res.status === 200) {
                     alert('비밀번호 변경이 완료되었습니다. 로그인 화면으로 이동합니다.');
-                    window.location.href = `${apiUrl}/login`; // 리다이렉션 처리
+                    window.location.href = `${apiUrl}/auth/login`; // 리다이렉션 처리
                 }else if(res.status === 400){ //비밀번호가 틀렸을 경우
                     alert(`${res.err}`);
                 } 

@@ -114,7 +114,11 @@ exports.modifyNickname = async (req, res) => {
         user_email: req.body.user_email,
         user_nickname: req.body.user_nickname,
     });
+    console.log(user);
+
     const response = await user.modifyNickname();
+
+
     return res.json(response)
 };
 
@@ -130,10 +134,11 @@ exports.withdrawal = async (req, res) => {
         user_email: req.body.user_email,
         psword: req.body.psword,
     });
+    console.log(user);
     const response = await user.withdrawalUser(); // 1. 회원 삭제
 
     // 2. 해당 유저의 모든 Refresh Token 삭제
     await user.deleteRefreshTokenByEmail(req.body.user_email);
 
-    return res.json({ ...response, message: "회원 탈퇴 및 토큰 삭제 완료" });
+    return res.status(200).json({ ...response, message: "회원 탈퇴 및 토큰 삭제 완료" });
 };
