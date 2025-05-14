@@ -62,7 +62,7 @@ exports.register = async (req, res) => {
             user_marketing: req.body.user_marketing,
         });
         const response = await user.register();
-        return res.json(response)
+        return res.status(200).json(response);
     } catch (err) {
         return res.json(err)
     }
@@ -81,7 +81,7 @@ exports.forgotpassword = async (req, res) => {
         new_psword: hashedPassword
     });
     const response = await user.modifyPsword2();
-    return res.json(response)
+    return res.status(200).json(response);
 
 };
 
@@ -100,7 +100,7 @@ exports.modifyPassword = async (req, res) => {
         psword: req.body.psword
     });
     const response = await user.modifyPsword1();
-    return res.json(response)
+    return res.status(200).json(response);
 };
 
 
@@ -119,7 +119,7 @@ exports.modifyNickname = async (req, res) => {
     const response = await user.modifyNickname();
 
 
-    return res.json(response)
+    return res.status(200).json(response);
 };
 
 
