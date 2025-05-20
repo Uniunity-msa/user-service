@@ -1,6 +1,6 @@
 "use strict";
 
-const University = require('./university');
+const University = require('./university/university');
 const bcrypt = require('bcrypt');
 
 const UserStorage = require("./userStorage");

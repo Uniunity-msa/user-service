@@ -1,5 +1,8 @@
 "use strict"
-const { pool } = require("../config/db");
+const { pool } = require("../../config/db");
+
+
+// user
 class UniversityStorage {
 
     // university_id받아 university_name반환하기
