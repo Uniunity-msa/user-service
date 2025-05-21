@@ -16,7 +16,7 @@ router.post("/modify/nickname", userController.modifyNickname);
 router.get("/withdrawal", userController.withdrawalPage);
 router.post("/withdrawal", userController.withdrawal);
 
-
+router.get("/info", userController.info);
 router.post("/duplicateCheckEmail", userController.duplicateCheckEmail);
 router.post("/emailAuth", userController.emailAuth);
 router.post("/register", userController.register);

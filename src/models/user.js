@@ -145,11 +145,29 @@ class User {
 
             console.log(userInfo);
 
-            if (userInfo) { //유저 정보 반환
+            if (userInfo) { //유저 정보 여부 반환
                 return {  result:false, status: 200, msg: "존재하는 이메일입니다." };
             } else {
                 //유저 정보 반환하지 못했을 경우
                 return {  result:true, msg: "사용가능한 이메일입니다.", status: 200 }
+            }
+        } catch (err) {
+            return { result: false, msg: "서버와 연결이 실패했습니다.", status: 400, err: `${err}` }
+        }
+    }
+
+    // 유저 정보 반환
+    async userInfo() {
+        try {
+            const client = this.body;
+            const userInfo = await UserStorage.getUserInfo(client.user_email);
+
+            console.log(userInfo);
+
+            if (userInfo) {
+                return { result: userInfo, status: 200 };
+            } else {
+                return { result: null, status: 404, msg: "사용자를 찾을 수 없습니다." };
             }
         } catch (err) {
             return { result: false, msg: "서버와 연결이 실패했습니다.", status: 400, err: `${err}` }

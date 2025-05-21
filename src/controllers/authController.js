@@ -11,8 +11,12 @@ exports.loginPage = (req, res) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
+  console.log(email);
+
   const userModel = new User();
   const user = await userModel.getUserInfo(email);
+  
+  console.log(user);
 
   // 이메일 존재하지 않음
   if (!user.loginStatus) {
@@ -40,10 +44,28 @@ exports.login = async (req, res) => {
   await userModel.saveRefreshToken(user.user_email, refreshToken, expiresAt);
 
 
+  // 쿠키 설정
+  res.cookie("accessToken", accessToken, {
+    httpOnly: true,
+    secure: false, // HTTPS에서만 동작
+    sameSite: "Strict",
+    maxAge: 15 * 60 * 1000, // 15분 정도 유효 (ex: access token 유효기간)
+    path: "/"
+  });
+
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "Strict",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7일
+    path: "/"
+  });
+
   // 응답
   return res.json({
-    accessToken,
-    refreshToken
+    message: "로그인 성공"
+    //accessToken,
+    //refreshToken
   });  
 }
 

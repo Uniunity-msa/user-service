@@ -2,14 +2,12 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 exports.authMiddleware = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  const refreshToken = req.headers["x-refresh-token"];
+  const accessToken = req.cookies.accessToken;
+  const refreshToken = req.cookies.refreshToken;
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  if (!accessToken) {
     return res.status(401).json({ message: "액세스 토큰 없음" });
   }
-
-  const accessToken = authHeader.split(" ")[1];
 
   console.log(accessToken);
   console.log(refreshToken);
@@ -34,16 +32,13 @@ exports.authMiddleware = async (req, res, next) => {
       }
 
       // 새 accessToken 발급
-      const newAccessToken = jwt.sign(
-        {
-          userEmail: savedToken.user_email,
-          nickname: savedToken.user_nickname,
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN }
-      );
-
-      res.setHeader("x-access-token", newAccessToken);
+      res.cookie("accessToken", newAccessToken, {
+        httpOnly: true,
+        secure: false,         
+        sameSite: "Strict",
+        maxAge: 15 * 60 * 1000, // 15분 (밀리초 기준)
+        path: "/"
+      });
 
       // 미들웨어 통과
       req.user = jwt.verify(newAccessToken, process.env.JWT_SECRET);

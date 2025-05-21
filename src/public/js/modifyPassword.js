@@ -1,18 +1,14 @@
 
-let userInfo; // 유저정보
+let userInfo;
 
-// 작성자 회원 정보 불러오기
 const loadloginData = async () => {
   const res = await fetch("/auth/me", {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      "x-refresh-token": localStorage.getItem("refreshToken")
-    }
+    credentials: "include", // 쿠키 포함
   });
 
-  const newAccessToken = res.headers.get("x-access-token");
-  if (newAccessToken) {
-    localStorage.setItem("accessToken", newAccessToken);
+  if (!res.ok) {
+    alert("로그인이 필요합니다.");
+    return;
   }
 
   userInfo = await res.json();

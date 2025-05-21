@@ -1,7 +1,7 @@
 "use strict"
 const { pool } = require("../config/db");
 class UserStorage {
-    //id를 통해 유저 정보 갖고 오기
+    //user_email를 통해 유저 정보 갖고 오기
     static getUserInfo(user_email) {
         return new Promise(async (resolve, reject) => {
             const query = "SELECT * FROM user WHERE user_email =?;";

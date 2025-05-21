@@ -18,14 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
           headers: {
             "Content-Type": "application/json"
           },
+          credentials: "include", // 쿠키 주고받기 위해 필요
           body: JSON.stringify({ email, password })
         });
   
         const data = await res.json();
   
         if (res.ok) {
-          localStorage.setItem("accessToken", data.accessToken);
-          localStorage.setItem("refreshToken", data.refreshToken);
           window.location.href = "/";
         } else {
           alert(data.message || "로그인에 실패했습니다.");

@@ -24,6 +24,18 @@ exports.duplicateCheckEmail = async (req, res) => {
     
 };
 
+// 회원정보 반환
+exports.info = async (req, res) => {
+    const { email } = req.query;
+
+    const user = new User({
+        user_email: email
+    })
+    const response = await user.userInfo();
+    return res.json(response)
+    
+};
+
 // 이메일 코드 인증
 exports.emailAuth = async (req, res) => {
     const emailAdderess = req.body.email;
