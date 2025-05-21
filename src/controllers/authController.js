@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
   });  
 }
 
-
+// 토큰
 exports.me = async (req, res) => {
     
   try {
@@ -68,6 +68,8 @@ exports.me = async (req, res) => {
     return res.status(401).json({ message: "유효하지 않은 토큰입니다." });
   }
 };
+
+
 
 exports.logout = async (req, res) => {
   try {

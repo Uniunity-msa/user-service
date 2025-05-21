@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
+const rabbitMQ = require("./src/rabbit/universityRabbitMQ");
 
 dotenv.config();
 
@@ -16,6 +17,18 @@ app.engine("html", require("ejs").renderFile);
 
 // sql db 연결
 const pool = require("./src/config/db");
+
+// RabbitMQ 연결 및 메시지 소비
+(async () => {
+  try {
+      await rabbitMQ.connectToRabbitMQ();
+      rabbitMQ.consumeMessages();
+      console.log('RabbitMQ 연결 및 메시지 소비 준비 완료');
+  } catch (err) {
+      console.error("RabbitMQ 연결 실패:", err);
+      process.exit(1);
+  }
+})();
 
 // POST 요청 파싱
 app.use(express.urlencoded({ extended: true }));
