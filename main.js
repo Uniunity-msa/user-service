@@ -9,6 +9,31 @@ dotenv.config();
 
 const app = express();
 
+// cors 정책 허용
+const allowedOrigins = [
+  "http://post-service:3000",
+  "http://start-service:3001",     
+  "http://partner-service:3003",       
+  "http://post-reaction-service:3002",
+  "http://34.47.84.123:3000",
+  "http://34.47.84.123:3001",
+  "http://34.47.84.123:3002",
+  "http://34.47.84.123:3003",
+  "http://34.47.84.123:3004"
+];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.warn("CORS 차단: ", origin);
+      // 대신 거부하면 그냥 false 리턴 (에러 객체 말고)
+      callback(null, false); 
+    }
+  },
+  credentials: true
+}));
+
 // 정적 파일
 app.use(express.static(path.join(__dirname, "src/public")));
 
@@ -38,27 +63,6 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// cors 정책 허용
-const allowedOrigins = [
-  "http://post-service:3000",
-  "http://start-service:3001",     
-  "http://partner-service:3003",       
-  "http://post-reaction-service:3002",
-  "http://34.47.84.123:3000",
-  "http://34.47.84.123:3001",
-  "http://34.47.84.123:3002",
-  "http://34.47.84.123:3003"
-];
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS 차단: 허용되지 않은 origin"));
-    }
-  },
-  credentials: true
-}));
 
 // 라우터 등록
 app.use("/auth", require("./src/routes/authRoutes")); 
