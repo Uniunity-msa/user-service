@@ -44,14 +44,14 @@ class PartnerStorage{
     // university_id로 해당 대학의 제휴 가게 모두 뽑아내기
 
     // University 중심좌표 받아오기
-    static async getUniversityLocation(university_id){ 
+    static async getUniversityLocation(university_url){ 
         return new Promise(async(resolve,reject)=>{
             pool.getConnection((err,connection)=>{
                 if(err){
                     console.error('MySQL 연결 오류: ',err);
                     reject(err);
                 }
-                pool.query("SELECT latitude, longitude FROM university WHERE university_id=?;",[university_id],function(err,rows){
+                pool.query("SELECT latitude, longitude FROM university WHERE university_url=?;",[university_url],function(err,rows){
                     connection.release();
                     if(err){
                         console.error('Query 오류',err);

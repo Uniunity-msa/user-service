@@ -36,7 +36,7 @@ function consumeMessages() {
     const result = await university_user.showUniversityNameList();
 
     console.log(msg, result);
-    
+
     reply(msg, result);
   });
 
@@ -62,11 +62,11 @@ function consumeMessages() {
     reply(msg, result);
   });
 
-  // 4. SendUniversityLocation: 대학id로 위치 정보 반환
+  // 4. SendUniversityLocation: 대학 url로 위치 정보 반환
   channel.consume('SendUniversityLocation', async (msg) => {
-    const { university_id } = JSON.parse(msg.content.toString());
+    const { university_url } = JSON.parse(msg.content.toString());
     const partner = new Partner_user();
-    const result = await partner.getUniversityLocation(university_id);
+    const result = await partner.getUniversityLocation(university_url);
 
     console.log(msg, result);
 
