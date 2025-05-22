@@ -34,6 +34,9 @@ function consumeMessages() {
   channel.consume('SendAllUniversityName', async (msg) => {
     const university_user = new University_user();
     const result = await university_user.showUniversityNameList();
+
+    console.log(msg, result);
+    
     reply(msg, result);
   });
 
@@ -42,6 +45,9 @@ function consumeMessages() {
     const { university_url } = JSON.parse(msg.content.toString());
     const partner = new Partner_user();
     const result = await partner.getUniversityID(university_url);
+
+    console.log(msg, result);
+
     reply(msg, result);
   });
 
@@ -50,6 +56,9 @@ function consumeMessages() {
     const { university_url } = JSON.parse(msg.content.toString());
     const partner = new Partner_user();
     const result = await partner.getUniversityName(university_url);
+
+    console.log(msg, result);
+
     reply(msg, result);
   });
 
@@ -58,6 +67,9 @@ function consumeMessages() {
     const { university_id } = JSON.parse(msg.content.toString());
     const partner = new Partner_user();
     const result = await partner.getUniversityLocation(university_id);
+
+    console.log(msg, result);
+
     reply(msg, result);
   });
 
@@ -74,12 +86,17 @@ function consumeMessages() {
     const { university_name } = JSON.parse(msg.content.toString());
     const partner = new Partner_user();
     const result = await partner.getUniversityID_name(university_name);
+
+    console.log(msg, result);
+
     reply(msg, result);
   });
 }
 
 // 응답 전송 함수 (RPC 방식)
 function reply(msg, data) {
+  console.log(data);
+
   channel.sendToQueue(
     msg.properties.replyTo, // 요청자가 준 응답용 큐
     Buffer.from(JSON.stringify(data)), // 응답 데이터
