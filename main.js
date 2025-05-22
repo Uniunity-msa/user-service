@@ -43,7 +43,11 @@ const allowedOrigins = [
   "http://post-service:3000",
   "http://start-service:3001",     
   "http://partner-service:3003",       
-  "http://post-reaction-service:3002"
+  "http://post-reaction-service:3002",
+  "http://34.47.84.123:3000",
+  "http://34.47.84.123:3001",
+  "http://34.47.84.123:3002",
+  "http://34.47.84.123:3003"
 ];
 app.use(cors({
   origin: function (origin, callback) {
