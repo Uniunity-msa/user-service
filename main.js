@@ -19,20 +19,17 @@ app.engine("html", require("ejs").renderFile);
 // sql db 연결
 const pool = require("./src/config/db");
 
-console.log("✅ DB_USER:", process.env.DB_USER);
-console.log("✅ DB_PASSWORD:", process.env.DB_PASSWORD);
-
-// RabbitMQ 연결 및 메시지 소비
-// (async () => {
-//   try {
-//       await rabbitMQ.connectToRabbitMQ();
-//       rabbitMQ.consumeMessages();
-//       console.log('RabbitMQ 연결 및 메시지 소비 준비 완료');
-//   } catch (err) {
-//       console.error("RabbitMQ 연결 실패:", err);
-//       process.exit(1);
-//   }
-// })();
+//RabbitMQ 연결 및 메시지 소비
+(async () => {
+  try {
+      await rabbitMQ.connectToRabbitMQ();
+      rabbitMQ.consumeMessages();
+      console.log('RabbitMQ 연결 및 메시지 소비 준비 완료');
+  } catch (err) {
+      console.error("RabbitMQ 연결 실패:", err);
+      process.exit(1);
+  }
+})();
 
 //쿠키 사용용
 app.use(cookieParser());

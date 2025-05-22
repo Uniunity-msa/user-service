@@ -16,7 +16,7 @@ router.get("/university-name", universityController.getUniversityName);
 router.get("/university-location", universityController.getUniversityLocation);
 
 // 대학 URL로 전체 대학 정보 조회
-router.get("/university", universityController.showUniversity);
+// router.get("/university", universityController.showUniversity);
 
 // 대학 이름으로 대학 ID 조회
 router.get("/university-id-by-name", universityController.getUniversityIDByName);
