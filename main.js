@@ -23,7 +23,6 @@ const pool = require("./src/config/db");
 (async () => {
   try {
       await rabbitMQ.connectToRabbitMQ();
-      rabbitMQ.consumeMessages();
       console.log('RabbitMQ 연결 및 메시지 소비 준비 완료');
   } catch (err) {
       console.error("RabbitMQ 연결 실패:", err);
