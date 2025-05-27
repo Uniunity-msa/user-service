@@ -153,5 +153,20 @@ exports.withdrawal = async (req, res) => {
     // 2. 해당 유저의 모든 Refresh Token 삭제
     await user.deleteRefreshTokenByEmail(req.body.user_email);
 
+    // 3. 쿠키 삭제 (accessToken, refreshToken)
+    res.clearCookie("accessToken", {
+        httpOnly: true,
+        secure: false, 
+        sameSite: "Strict",
+        path: "/"
+    });
+
+    res.clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: false,
+        sameSite: "Strict",
+        path: "/"
+    });
+
     return res.status(200).json({ success: true, message: "회원탈퇴 완료" });
 };

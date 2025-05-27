@@ -35,6 +35,7 @@ const fetchWithdrawalUser = async (event) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include", // 쿠키 포함 필수
       body: JSON.stringify(req),
     })
     .then((res) => res.json())
