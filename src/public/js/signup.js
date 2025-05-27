@@ -18,9 +18,11 @@ var backBtn = document.getElementById("backBtn");
 const navBar=document.getElementById("navbar");
 navBar.setAttribute("href", `${apiUrl}`);
 
+const startApiUrl = window.baseUrls.start;
+
 //처음으로 버튼
 backBtn.addEventListener('click', () => {
-  window.location.href = '/';
+  window.location.href = `${startApiUrl}/mainPage`; 
 });
 
 // // 현재 URL 가져오기

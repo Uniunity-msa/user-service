@@ -124,6 +124,7 @@ exports.logout = async (req, res) => {
       path: "/"
     });
 
+    return res.status(200).json({ message: "로그아웃 완료" });
 
   } catch (err) {
     return res.status(401).json({ message: "유효하지 않은 토큰입니다." });

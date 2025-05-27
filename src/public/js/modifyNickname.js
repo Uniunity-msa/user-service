@@ -1,4 +1,5 @@
 let userInfo;
+const post_reactionApiUrl = window.baseUrls.post_reaction;
 
 const loadloginData = async () => {
   const res = await fetch("/auth/me", {
@@ -7,6 +8,7 @@ const loadloginData = async () => {
 
   if (!res.ok) {
     alert("로그인이 필요합니다.");
+    window.location.href = "/auth/login";
     return;
   }
 
@@ -39,7 +41,8 @@ const fetchChangeNickname = async (event) => {
       .then(res => {
         if (res.status === 200) {
           alert('닉네임 변경이 완료되었습니다.');
-          window.location.href = "/mypage"; // 리다이렉션 처리
+          window.location.href = `${post_reactionApiUrl}/mypage`; // 리다이렉션 처리
+
         } else {
           alert("서버의 문제로 닉네임변경에 실패했습니다. 다시 시도해주세요.");
         }

@@ -103,7 +103,7 @@ exports.modifyPasswordPage = (req, res) => {
     return res.render("modifyPassword.html");
 };
 exports.modifyPassword = async (req, res) => {
-    console.log("🔍 비밀번호 변경 요청 바디:", req.body);
+    console.log("비밀번호 변경 요청 바디:", req.body);
 
     const hashedPassword = await bcrypt.hash(req.body.new_psword, 10)
     const user = new User({

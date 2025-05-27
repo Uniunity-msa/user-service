@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await res.json();
   
         if (res.ok) {
-          window.location.href = "/";
+          const startApiUrl = window.baseUrls.start;
+          window.location.href = `${startApiUrl}/mainPage`; 
         } else {
           alert(data.message || "로그인에 실패했습니다.");
         }
