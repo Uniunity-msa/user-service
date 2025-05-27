@@ -37,19 +37,15 @@ const fetchWithdrawalUser = async (event) => {
       },
       body: JSON.stringify(req),
     })
-      .then((res) => res.json())
-      .then(res => {
-        if (res.status === 200) {
-          alert('회원 탈퇴가 완료되었습니다.');
-          window.location.href = `${startApiUrl}/mainPage`;  
-        } else {
-          alert("서버의 문제로 회원탈퇴에 실패했습니다. 다시 시도해주세요.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-        alert("서버의 문제로 회원탈퇴에 실패했습니다. 다시 시도해주세요.");
-      })
+    .then((res) => res.json())
+    .then(res => {
+      if (res.success) {
+          alert("회원 탈퇴가 완료되었습니다.");
+          window.location.href = `${startApiUrl}/mainPage`; 
+      } else {
+          alert("회원 탈퇴에 실패했습니다. 다시 시도해주세요.");
+      }
+    })
   }
 
 }

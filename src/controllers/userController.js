@@ -153,5 +153,5 @@ exports.withdrawal = async (req, res) => {
     // 2. 해당 유저의 모든 Refresh Token 삭제
     await user.deleteRefreshTokenByEmail(req.body.user_email);
 
-    return res.status(200).json({ ...response, message: "회원 탈퇴 및 토큰 삭제 완료" });
+    return res.status(200).json({ success: true, message: "회원탈퇴 완료" });
 };
