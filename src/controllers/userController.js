@@ -85,7 +85,7 @@ exports.register = async (req, res) => {
 
 exports.forgotpasswordPage = (req, res) => {
 
-    return res.render("forgotpassword.html");
+    return res.render("forgotPassword.html");
 };
 exports.forgotpassword = async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.new_psword, 10)
