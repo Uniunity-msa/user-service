@@ -397,7 +397,7 @@ confirmAuthEmailBtn.addEventListener('click', compareAuthenticationCode);
 function register() {
     const universityIdMap=universitySearchIdListMap(universitySearchList)
 
-    const usertype = checkbox1.checked ? student : retailer;
+    const usertype = checkbox1.checked ? "student" : "retailer";
     const selectedEmailDomain = selectElement2.value;
 
     if(!emailAuthChecked) {
