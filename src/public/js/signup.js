@@ -446,17 +446,13 @@ function register() {
         })
         .then((res) => res.json())
         .then(res => {
-            if (res.status === 200) {
-              alert("회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.")
-              window.location.href = "/auth/login"; // 리다이렉션 처리
-            } else {
-              alert("서버의 문제로 회원가입에 실패했습니다. 다시 시도해주세요.");
-            }
-          })
-          .catch((error) => {
-            console.error("Error: ", error);
-            alert("서버의 문제로 회원가입에 실패했습니다. 다시 시도해주세요.");
-          })
+        if (res.success) {
+            alert("회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.");
+            window.location.href = "/auth/login";
+        } else {
+            alert("회원가입에 실패했습니다.");
+        }
+        })
     }
     
 }

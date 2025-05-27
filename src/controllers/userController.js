@@ -74,7 +74,8 @@ exports.register = async (req, res) => {
             user_marketing: req.body.user_marketing,
         });
         const response = await user.register();
-        return res.status(200).json(response);
+        return res.status(200).json({ success: true, message: "회원가입 완료" });
+
     } catch (err) {
         return res.json(err)
     }
