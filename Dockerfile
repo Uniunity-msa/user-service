@@ -5,7 +5,7 @@ FROM node:18
 WORKDIR /app
 
 # nc 설치 추가
-RUN apt-get update && apt-get install -y netcat-openbsd && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install -y netcat-openbsd && rm -rf /var/lib/apt/lists/*
 
 # 3. package.json 복사 후 의존성 설치
 COPY package*.json ./
@@ -15,10 +15,11 @@ RUN npm install
 COPY . .
 
 # 5. wait-for.sh 실행 권한 부여
-RUN chmod +x wait-for.sh
+# RUN chmod +x wait-for.sh
 
 # 6. 앱이 사용하는 포트 열기 (ex: 3000)
 EXPOSE 3004
 
 # 7. 서버 실행
-CMD ["./wait-for.sh", "mysql_host", "3306", "node", "server.js"]
+# CMD ["./wait-for.sh", "mysql_host", "3306", "node", "server.js"]
+CMD node server.js 
