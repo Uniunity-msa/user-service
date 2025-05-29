@@ -1,5 +1,5 @@
-
 let userInfo;
+const post_reactionApiUrl = window.baseUrls.post_reaction;
 
 const loadloginData = async () => {
   const res = await fetch("/auth/me", {
@@ -8,6 +8,7 @@ const loadloginData = async () => {
 
   if (!res.ok) {
     alert("로그인이 필요합니다.");
+    window.location.href = "/auth/login";
     return;
   }
 
@@ -34,6 +35,7 @@ function validatePassword(password) {
     // 모든 조건을 만족하면 true 반환
     return true;
 }
+
 
 const fetchChangePsword = async (event) => {
     event.preventDefault(); // 기본 폼 제출 동작을 중단합니다. 비밀번호 폼이 입력되지 않으면 중단
@@ -82,7 +84,7 @@ const fetchChangePsword = async (event) => {
             .then(res => {
                 if (res.status === 200) {
                     alert('비밀번호 변경이 완료되었습니다.');
-                    window.location.href = "/mypage"; // 리다이렉션 처리
+                    window.location.href = `${post_reactionApiUrl}/mypage`; // 리다이렉션 처리
                 }else if(res.status === 400){ //비밀번호가 틀렸을 경우
                     alert(`${res.err}`);
                 } 

@@ -74,7 +74,8 @@ exports.register = async (req, res) => {
             user_marketing: req.body.user_marketing,
         });
         const response = await user.register();
-        return res.status(200).json(response);
+        return res.status(200).json({ success: true, message: "회원가입 완료" });
+
     } catch (err) {
         return res.json(err)
     }
@@ -84,7 +85,7 @@ exports.register = async (req, res) => {
 
 exports.forgotpasswordPage = (req, res) => {
 
-    return res.render("forgotpassword.html");
+    return res.render("forgotPassword.html");
 };
 exports.forgotpassword = async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.new_psword, 10)
@@ -103,7 +104,7 @@ exports.modifyPasswordPage = (req, res) => {
     return res.render("modifyPassword.html");
 };
 exports.modifyPassword = async (req, res) => {
-    console.log("🔍 비밀번호 변경 요청 바디:", req.body);
+    console.log("비밀번호 변경 요청 바디:", req.body);
 
     const hashedPassword = await bcrypt.hash(req.body.new_psword, 10)
     const user = new User({
@@ -152,5 +153,20 @@ exports.withdrawal = async (req, res) => {
     // 2. 해당 유저의 모든 Refresh Token 삭제
     await user.deleteRefreshTokenByEmail(req.body.user_email);
 
-    return res.status(200).json({ ...response, message: "회원 탈퇴 및 토큰 삭제 완료" });
+    // 3. 쿠키 삭제 (accessToken, refreshToken)
+    res.clearCookie("accessToken", {
+        httpOnly: true,
+        secure: false, 
+        sameSite: "Strict",
+        path: "/"
+    });
+
+    res.clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: false,
+        sameSite: "Strict",
+        path: "/"
+    });
+
+    return res.status(200).json({ success: true, message: "회원탈퇴 완료" });
 };

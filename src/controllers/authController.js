@@ -95,21 +95,36 @@ exports.me = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-    const refreshToken = req.headers["x-refresh-token"];
+    const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) {
       return res.status(400).json({ message: "리프레시 토큰이 없습니다." });
     }
 
     const userModel = new User();
     
-    const savedToken = await userModel.getRefreshTokenByToken(refreshToken);
-    if (!savedToken) {
-      return res.status(404).json({ message: "토큰이 존재하지 않거나 이미 삭제되었습니다." });
-    }
+    // const savedToken = await userModel.getRefreshTokenByToken(refreshToken);
+    // if (!savedToken) {
+    //   return res.status(404).json({ message: "토큰이 존재하지 않거나 이미 삭제되었습니다." });
+    // }
 
     // DB에서 refreshToken 삭제
     await userModel.deleteRefreshToken(refreshToken);
 
+    res.clearCookie("accessToken", {
+      httpOnly: true,
+      secure: false, // 프로덕션에선 true
+      sameSite: "Strict",
+      path: "/"
+    });
+
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: false,
+      sameSite: "Strict",
+      path: "/"
+    });
+
+    return res.status(200).json({ message: "로그아웃 완료" });
 
   } catch (err) {
     return res.status(401).json({ message: "유효하지 않은 토큰입니다." });

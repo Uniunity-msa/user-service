@@ -18,9 +18,11 @@ var backBtn = document.getElementById("backBtn");
 const navBar=document.getElementById("navbar");
 navBar.setAttribute("href", `${apiUrl}`);
 
+const startApiUrl = window.baseUrls.start;
+
 //처음으로 버튼
 backBtn.addEventListener('click', () => {
-  window.location.href = '/';
+  window.location.href = `${startApiUrl}/mainPage`; 
 });
 
 // // 현재 URL 가져오기
@@ -395,7 +397,7 @@ confirmAuthEmailBtn.addEventListener('click', compareAuthenticationCode);
 function register() {
     const universityIdMap=universitySearchIdListMap(universitySearchList)
 
-    const usertype=checkbox1.checked?"학생":"상인";
+    const usertype = checkbox1.checked ? "student" : "retailer";
     const selectedEmailDomain = selectElement2.value;
 
     if(!emailAuthChecked) {
@@ -444,17 +446,13 @@ function register() {
         })
         .then((res) => res.json())
         .then(res => {
-            if (res.status === 200) {
-              alert("회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.")
-              window.location.href = "/auth/login"; // 리다이렉션 처리
-            } else {
-              alert("서버의 문제로 회원가입에 실패했습니다. 다시 시도해주세요.");
-            }
-          })
-          .catch((error) => {
-            console.error("Error: ", error);
-            alert("서버의 문제로 회원가입에 실패했습니다. 다시 시도해주세요.");
-          })
+        if (res.success) {
+            alert("회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.");
+            window.location.href = "/auth/login";
+        } else {
+            alert("회원가입에 실패했습니다.");
+        }
+        })
     }
     
 }

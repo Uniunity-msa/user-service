@@ -19,9 +19,9 @@ class Partner{
             return{success:false,msg:err};
         }
     }
-    async getUniversityLocation(university_id){
+    async getUniversityLocation(university_url){
         try{
-            const response = await PartnerStorage.getUniversityLocation(university_id);
+            const response = await PartnerStorage.getUniversityLocation(university_url);
             return response;
         }catch(err){
             return{success:false,msg:err};

@@ -13,6 +13,7 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.x",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "dotenv": "^16.x",
     "ejs": "^3.x",
     "express": "^4.x",
