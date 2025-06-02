@@ -5,7 +5,7 @@ const apiUrl = "";
 
 // 마이크로서비스별 API 주소
 window.baseUrls = {
-  post: "http://uniunity",
-  post_reaction: "http://uniunity/mypage",
-  start: "http://uniunity/start"
+  post: "http://uniunity.store/post",
+  post_reaction: "http://uniunity.store/mypage",
+  start: "http://uniunity.store/council"
 };
