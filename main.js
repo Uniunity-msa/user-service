@@ -19,7 +19,8 @@ const allowedOrigins = [
   "http://34.22.87.169:3000",
   "http://34.22.87.169:3001",
   "http://34.22.87.169:3002",
-  "http://34.22.87.169:3003"   
+  "http://34.22.87.169:3003", 
+  "http://34.22.87.169:80"
 ];
 app.use(cors({
   origin: function (origin, callback) {
