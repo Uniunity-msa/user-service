@@ -13,11 +13,17 @@ class PartnerStorage{
                 }
                 pool.query("SELECT university_id FROM university WHERE university_url=?;",[university_url],function(err,rows){
                     connection.release();
-                    if(err){
-                        console.error('Query 함수 오류',err);
-                        reject(err)
+                    if (err) {
+                        console.error('Query 함수 오류', err);
+                        reject(err);
+                        return;
                     }
-                    resolve(rows[0].university_id);
+                    if (rows.length === 0) {
+                    console.warn(`해당 university_url에 대한 결과 없음: ${university_url}`);
+                    resolve(null); // 혹은 reject(new Error("Not found"))
+                    return;
+                }
+                resolve(rows[0].university_id);
                 });
             });     
         });
