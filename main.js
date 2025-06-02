@@ -15,7 +15,11 @@ const allowedOrigins = [
   "http://34.22.87.148:3001",
   "http://34.22.87.148:3002",
   "http://34.22.87.148:3003",
-  "http://34.22.87.148:3004"
+  "http://uniunity",
+  "http://34.22.87.169:3000",
+  "http://34.22.87.169:3001",
+  "http://34.22.87.169:3002",
+  "http://34.22.87.169:3003"   
 ];
 app.use(cors({
   origin: function (origin, callback) {
@@ -32,6 +36,8 @@ app.use(cors({
 
 // 정적 파일
 app.use(express.static(path.join(__dirname, "src/public")));
+app.use("/user/css", express.static(path.join(dirname, "src/public/css")));
+app.use("/user/js", express.static(path.join(__dirname, "src/public/js"))); 
 
 // 뷰 엔진 설정
 app.set("views", path.join(__dirname, "src/views"));
