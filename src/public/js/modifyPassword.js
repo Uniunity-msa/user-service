@@ -84,7 +84,7 @@ const fetchChangePsword = async (event) => {
             .then(res => {
                 if (res.status === 200) {
                     alert('비밀번호 변경이 완료되었습니다.');
-                    window.location.href = `${post_reactionApiUrl}/mypage`; // 리다이렉션 처리
+                    window.location.href = `/mypage`; // 리다이렉션 처리
                 }else if(res.status === 400){ //비밀번호가 틀렸을 경우
                     alert(`${res.err}`);
                 } 
