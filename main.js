@@ -36,7 +36,7 @@ app.use(cors({
 
 // 정적 파일
 app.use(express.static(path.join(__dirname, "src/public")));
-app.use("/user/css", express.static(path.join(dirname, "src/public/css")));
+app.use("/user/css", express.static(path.join(__dirname, "src/public/css")));
 app.use("/user/js", express.static(path.join(__dirname, "src/public/js"))); 
 
 // 뷰 엔진 설정
