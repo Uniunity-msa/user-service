@@ -22,7 +22,7 @@ const startApiUrl = window.baseUrls.start;
 
 //처음으로 버튼
 backBtn.addEventListener('click', () => {
-  window.location.href = `${startApiUrl}/mainPage`; 
+  window.location.href = `/mainPage`; 
 });
 
 // // 현재 URL 가져오기
