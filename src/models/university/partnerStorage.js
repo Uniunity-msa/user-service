@@ -41,7 +41,7 @@ class PartnerStorage{
                         console.error('Query 함수 오류',err);
                         reject(err)
                     }
-
+                    console.log("university_url: ", university_url);
                     console.log("university_url로 university_name받아오기\n", rows);
 
 
@@ -67,6 +67,7 @@ class PartnerStorage{
                         reject(err);
                     }
 
+                    console.log("university_url: ", university_url);
                     console.log("University 중심좌표 받아오기\n", rows);
 
                     resolve(rows[0]);
@@ -89,6 +90,7 @@ class PartnerStorage{
                         reject(err);
                     }
 
+                    console.log("university_url: ", university_name);
                     console.log("unversity_name 입력받아 university_id 보내기\n", rows);
                     
                     resolve(rows[0].university_id);
