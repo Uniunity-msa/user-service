@@ -18,12 +18,10 @@ class PartnerStorage{
                         reject(err);
                         return;
                     }
-                    if (rows.length === 0) {
-                    console.warn(`해당 university_url에 대한 결과 없음: ${university_url}`);
-                    resolve(null); // 혹은 reject(new Error("Not found"))
-                    return;
-                }
-                resolve(rows[0].university_id);
+                    console.log(rows[0]);
+                    console.log("unversity_url 입력받아 university_id 보내기\n", rows);
+
+                    resolve(rows[0].university_id);
                 });
             });     
         });
@@ -42,6 +40,10 @@ class PartnerStorage{
                         console.error('Query 함수 오류',err);
                         reject(err)
                     }
+
+                    console.log("university_url로 university_name받아오기\n", data);
+
+
                     resolve(data[0]);
                 });
             });     
@@ -63,6 +65,9 @@ class PartnerStorage{
                         console.error('Query 오류',err);
                         reject(err);
                     }
+
+                    console.log("University 중심좌표 받아오기\n", rows);
+
                     resolve(rows[0]);
                 })
             });
@@ -82,6 +87,9 @@ class PartnerStorage{
                         console.error('Query 오류',err);
                         reject(err);
                     }
+
+                    console.log("unversity_url 입력받아 university_id 보내기\n", rows);
+                    
                     resolve(rows[0].university_id);
                 })  
             });     
