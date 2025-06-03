@@ -42,7 +42,7 @@ const fetchWithdrawalUser = async (event) => {
     .then(res => {
       if (res.success) {
           alert("회원 탈퇴가 완료되었습니다.");
-          window.location.href = `/mainPage`; 
+          window.location.href = `/mainpage`; 
       } else {
           alert("회원 탈퇴에 실패했습니다. 다시 시도해주세요.");
       }
