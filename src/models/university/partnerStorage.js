@@ -18,6 +18,7 @@ class PartnerStorage{
                         reject(err);
                         return;
                     }
+                    console.log("university_url: ", university_url);
                     console.log(rows[0]);
                     console.log("unversity_url 입력받아 university_id 보내기\n", rows);
 
@@ -73,7 +74,7 @@ class PartnerStorage{
             });
         })    
     }
-    // unversity_url 입력받아 university_id 보내기
+    // unversity_name 입력받아 university_id 보내기
     static getUniversityID_name(university_name){
         return new Promise(async(resolve,reject)=>{
             pool.getConnection((err,connection)=>{
@@ -88,7 +89,7 @@ class PartnerStorage{
                         reject(err);
                     }
 
-                    console.log("unversity_url 입력받아 university_id 보내기\n", rows);
+                    console.log("unversity_name 입력받아 university_id 보내기\n", rows);
                     
                     resolve(rows[0].university_id);
                 })  
