@@ -42,10 +42,10 @@ class PartnerStorage{
                         reject(err)
                     }
                     console.log("university_url: ", university_url);
-                    console.log("university_url로 university_name받아오기\n", rows);
+                    console.log("university_url로 university_name받아오기\n", data);
 
 
-                    resolve(rows[0]);
+                    resolve(data[0]);
                 });
             });     
         });
