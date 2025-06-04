@@ -41,7 +41,7 @@ const fetchChangeNickname = async (event) => {
       .then(res => {
         if (res.status === 200) {
           alert('닉네임 변경이 완료되었습니다.');
-          window.location.href = `${post_reactionApiUrl}/`; // 리다이렉션 처리
+          window.location.href = `${post_reactionApiUrl}/mypage`; // 리다이렉션 처리
 
         } else {
           alert("서버의 문제로 닉네임변경에 실패했습니다. 다시 시도해주세요.");
