@@ -15,12 +15,14 @@ const allowedOrigins = [
   "http://34.22.87.148:3001",
   "http://34.22.87.148:3002",
   "http://34.22.87.148:3003",
-  "http://uniunity",
+  "http://uniunity.store",
+  "https://uniunity.store",
   "http://34.22.87.169:3000",
   "http://34.22.87.169:3001",
   "http://34.22.87.169:3002",
   "http://34.22.87.169:3003", 
-  "http://34.22.87.169:80"
+  "http://34.22.87.169:80", 
+  "https://34.22.87.169:80"
 ];
 app.use(cors({
   origin: function (origin, callback) {
