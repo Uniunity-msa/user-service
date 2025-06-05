@@ -7,13 +7,14 @@ const cors = require("cors");
 
 const mysql = require('mysql2/promise');
 const amqp = require('amqplib');
-app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'OK' });
-});
 
 dotenv.config();
 
 const app = express();
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK' });
+});
 
 // Readiness Probe용 엔드포인트: DB & RabbitMQ 연결 검사
 app.get('/ready', async (req, res) => {
