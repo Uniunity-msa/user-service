@@ -15,12 +15,17 @@ class PartnerStorage{
                     connection.release();
                     if (err) {
                         console.error('Query 함수 오류', err);
-                        reject(err);
-                        return;
+                        return reject(err); // 쿼리 실패
                     }
                     console.log("university_url: ", university_url);
                     console.log(rows[0]);
                     console.log("unversity_url 입력받아 university_id 보내기\n", rows);
+
+                    if (rows.length === 0) {
+                        const noResultError = new Error('해당 university_url이 존재하지 않습니다.');
+                        console.warn(noResultError.message);
+                        return reject(noResultError); // 결과 없음도 오류로 처리
+                    }
 
                     resolve(rows[0].university_id);
                 });
@@ -33,17 +38,22 @@ class PartnerStorage{
             pool.getConnection((err,connection)=>{
                 if(err){
                     console.error('MySQL 연결 오류: ',err);
-                    reject(err)
+                    return reject(err)
                 }
                 pool.query('SELECT university_name FROM university WHERE university_url =?',[university_url],(err,data)=>{
                     connection.release();
                     if(err){
                         console.error('Query 함수 오류',err);
-                        reject(err)
+                        return reject(err)
                     }
                     console.log("university_url: ", university_url);
                     console.log("university_url로 university_name받아오기\n", data);
 
+                    if (data.length === 0) {
+                        const noResultError = new Error('해당 university_url이 존재하지 않습니다.');
+                        console.warn(noResultError.message);
+                        return reject(noResultError); // 결과 없음도 오류로 처리
+                    }
 
                     resolve(data[0]);
                 });
@@ -64,12 +74,18 @@ class PartnerStorage{
                     connection.release();
                     if(err){
                         console.error('Query 오류',err);
-                        reject(err);
+                        return reject(err);
                     }
 
                     console.log("university_url: ", university_url);
                     console.log("University 중심좌표 받아오기\n", rows);
 
+                    if (rows.length === 0) {
+                        const noResultError = new Error('해당 university_url이 존재하지 않습니다.');
+                        console.warn(noResultError.message);
+                        return reject(noResultError); // 결과 없음도 오류로 처리
+                    }
+                    
                     resolve(rows[0]);
                 })
             });
@@ -87,11 +103,17 @@ class PartnerStorage{
                     connection.release();
                     if(err){
                         console.error('Query 오류',err);
-                        reject(err);
+                        return reject(err);
                     }
 
                     console.log("university_url: ", university_name);
                     console.log("unversity_name 입력받아 university_id 보내기\n", rows);
+                    
+                    if (rows.length === 0) {
+                        const noResultError = new Error('해당 university_url이 존재하지 않습니다.');
+                        console.warn(noResultError.message);
+                        return reject(noResultError); // 결과 없음도 오류로 처리
+                    }
                     
                     resolve(rows[0].university_id);
                 })  

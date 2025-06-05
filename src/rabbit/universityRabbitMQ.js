@@ -42,35 +42,63 @@ function consumeMessages() {
 
   // 2. SendUniversityID: university url로 대학 id반환
   channel.consume('SendUniversityID', async (msg) => {
-    const { university_url } = JSON.parse(msg.content.toString());
-    const partner = new Partner_user();
-    const result = await partner.getUniversityID(university_url);
+    try {
+      const { university_url } = JSON.parse(msg.content.toString());
+      const partner = new Partner_user();
+      const result = await partner.getUniversityID(university_url);
 
-    console.log(msg, result);
+      console.log(msg, result);
 
-    reply(msg, result);
+      reply(msg, result); 
+    } catch (err) {
+      console.error('메시지 처리 중 오류 발생:', err.message);
+      
+      // 실패해도 ack을 호출해서 redelivery 방지
+      // 만약 실패 메시지를 다른 큐에 넣고 싶다면 여기서 nack + DLQ 설정 가능
+      reply(msg, { error: err.message || '서버 오류' });
+    }
+    
   });
 
   // 3. SendUniversityName: university url로 대학 이름 반환
   channel.consume('SendUniversityName', async (msg) => {
-    const { university_url } = JSON.parse(msg.content.toString());
-    const partner = new Partner_user();
-    const result = await partner.getUniversityName(university_url);
+    
+    try {
+      const { university_url } = JSON.parse(msg.content.toString());
+      const partner = new Partner_user();
+      const result = await partner.getUniversityName(university_url);
 
-    console.log(msg, result);
+      console.log(msg, result);
 
-    reply(msg, result);
+      reply(msg, result);
+    } catch (err) { 
+      console.error('메시지 처리 중 오류 발생:', err.message);
+      
+      // 실패해도 ack을 호출해서 redelivery 방지
+      // 만약 실패 메시지를 다른 큐에 넣고 싶다면 여기서 nack + DLQ 설정 가능
+      reply(msg, { error: err.message || '서버 오류' });
+    }
   });
 
   // 4. SendUniversityLocation: 대학 url로 위치 정보 반환
   channel.consume('SendUniversityLocation', async (msg) => {
-    const { university_url } = JSON.parse(msg.content.toString());
-    const partner = new Partner_user();
-    const result = await partner.getUniversityLocation(university_url);
+    try {
+      const { university_url } = JSON.parse(msg.content.toString());
+      const partner = new Partner_user();
+      const result = await partner.getUniversityLocation(university_url);
 
-    console.log(msg, result);
+      console.log(msg, result);
 
-    reply(msg, result);
+      reply(msg, result);
+    } catch (err) {
+      console.error('메시지 처리 중 오류 발생:', err.message);
+      
+      // 실패해도 ack을 호출해서 redelivery 방지
+      // 만약 실패 메시지를 다른 큐에 넣고 싶다면 여기서 nack + DLQ 설정 가능
+      reply(msg, { error: err.message || '서버 오류' });
+    }
+    
+
   });
 
   // 5. SendUniversity
@@ -83,13 +111,23 @@ function consumeMessages() {
 
   // 6. SendUniversityIDByName: university 이름으로 id 반환
   channel.consume('SendUniversityIDByName', async (msg) => {
-    const { university_name } = JSON.parse(msg.content.toString());
-    const partner = new Partner_user();
-    const result = await partner.getUniversityID_name(university_name);
+    try {
+      const { university_name } = JSON.parse(msg.content.toString());
+      const partner = new Partner_user();
+      const result = await partner.getUniversityID_name(university_name);
 
-    console.log(msg, result);
+      console.log(msg, result);
 
-    reply(msg, result);
+      reply(msg, result);
+    } catch (err) {
+      console.error('메시지 처리 중 오류 발생:', err.message);
+      
+      // 실패해도 ack을 호출해서 redelivery 방지
+      // 만약 실패 메시지를 다른 큐에 넣고 싶다면 여기서 nack + DLQ 설정 가능
+      reply(msg, { error: err.message || '서버 오류' });
+    }
+    
+
   });
 }
 
