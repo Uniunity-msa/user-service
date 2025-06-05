@@ -11,6 +11,10 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK' });
 });
 
+dotenv.config();
+
+const app = express();
+
 // Readiness Probe용 엔드포인트: DB & RabbitMQ 연결 검사
 app.get('/ready', async (req, res) => {
   try {
@@ -45,11 +49,6 @@ app.get('/ready', async (req, res) => {
   }
 });
 
-
-
-dotenv.config();
-
-const app = express();
 
 // cors 정책 허용
 const allowedOrigins = [
