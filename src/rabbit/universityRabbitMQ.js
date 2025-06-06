@@ -133,11 +133,15 @@ function consumeMessages() {
 
 // 응답 전송 함수 (RPC 방식)
 function reply(msg, data) {
-  console.log(data);
+  const fullResponse = {
+    ...data,
+    correlationId: msg.properties.correlationId,
+  };
+  console.log(fullResponse);
 
   channel.sendToQueue(
     msg.properties.replyTo, // 요청자가 준 응답용 큐
-    Buffer.from(JSON.stringify(data)), // 응답 데이터
+    Buffer.from(JSON.stringify(fullResponse)), // 응답 데이터
     { correlationId: msg.properties.correlationId } // 요청-응답 매칭용 ID
   );
   channel.ack(msg);
