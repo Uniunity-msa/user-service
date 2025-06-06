@@ -1,11 +1,20 @@
 // partner
 const { resolve } = require("path");
 const { pool } = require("../../config/db");
+const UniversityStorage = require("./universityStorage");
 
 class PartnerStorage{
     // unversity_url 입력받아 university_id 보내기
     static getUniversityID(university_url){
         return new Promise(async (resolve,reject)=> {
+
+            // db에서 요청쿼리 존재하는지 확인
+            const listResponse = await UniversityStorage.getUniversityNameList();
+            const found = listResponse.result.find(u => u.university_url === university_url);
+            if (!found) {
+                return resolve({ success: false, status: 404, message: '해당 university_url이 존재하지 않습니다.' });
+            }
+
             pool.getConnection((err,connection)=>{
                 if(err){
                     console.error('MySQL 연결 오류: ',err);
@@ -35,6 +44,14 @@ class PartnerStorage{
     // university_url로 university_name받아오기
     static getUniversityName(university_url) {
         return new Promise(async (resolve,reject)=> {
+
+            // db에서 요청쿼리 존재하는지 확인
+            const listResponse = await UniversityStorage.getUniversityNameList();
+            const found = listResponse.result.find(u => u.university_url === university_url);
+            if (!found) {
+                return resolve({ success: false, status: 404, message: '해당 university_url이 존재하지 않습니다.' });
+            }
+
             pool.getConnection((err,connection)=>{
                 if(err){
                     console.error('MySQL 연결 오류: ',err);
@@ -65,6 +82,14 @@ class PartnerStorage{
     // University 중심좌표 받아오기
     static async getUniversityLocation(university_url){ 
         return new Promise(async(resolve,reject)=>{
+
+            // db에서 요청쿼리 존재하는지 확인
+            const listResponse = await UniversityStorage.getUniversityNameList();
+            const found = listResponse.result.find(u => u.university_url === university_url);
+            if (!found) {
+                return resolve({ success: false, status: 404, message: '해당 university_url이 존재하지 않습니다.' });
+            }
+
             pool.getConnection((err,connection)=>{
                 if(err){
                     console.error('MySQL 연결 오류: ',err);
@@ -94,6 +119,14 @@ class PartnerStorage{
     // unversity_name 입력받아 university_id 보내기
     static getUniversityID_name(university_name){
         return new Promise(async(resolve,reject)=>{
+
+            // db에서 요청쿼리 존재하는지 확인
+            const listResponse = await UniversityStorage.getUniversityNameList();
+            const found = listResponse.result.find(u => u.university_name === university_name);
+            if (!found) {
+                return resolve({ success: false, status: 404, message: '해당 university_name 존재하지 않습니다.' });
+            }
+
             pool.getConnection((err,connection)=>{
                 if(err){
                     console.error('MySQL 연결 오류: ',err);
