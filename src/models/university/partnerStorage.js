@@ -12,6 +12,7 @@ class PartnerStorage{
             const listResponse = await UniversityStorage.getUniversityNameList();
             const found = listResponse.result.find(u => u.university_url === university_url);
             if (!found) {
+                console.log("university_url: ", university_url);
                 return resolve({ success: false, status: 404, message: '해당 university_url이 존재하지 않습니다.' });
             }
 
@@ -49,6 +50,7 @@ class PartnerStorage{
             const listResponse = await UniversityStorage.getUniversityNameList();
             const found = listResponse.result.find(u => u.university_url === university_url);
             if (!found) {
+                console.log("university_url: ", university_url);
                 return resolve({ success: false, status: 404, message: '해당 university_url이 존재하지 않습니다.' });
             }
 
@@ -87,6 +89,7 @@ class PartnerStorage{
             const listResponse = await UniversityStorage.getUniversityNameList();
             const found = listResponse.result.find(u => u.university_url === university_url);
             if (!found) {
+                console.log("university_url: ", university_url);
                 return resolve({ success: false, status: 404, message: '해당 university_url이 존재하지 않습니다.' });
             }
 
@@ -124,6 +127,7 @@ class PartnerStorage{
             const listResponse = await UniversityStorage.getUniversityNameList();
             const found = listResponse.result.find(u => u.university_name === university_name);
             if (!found) {
+                console.log("university_url: ", university_url);
                 return resolve({ success: false, status: 404, message: '해당 university_name 존재하지 않습니다.' });
             }
 
