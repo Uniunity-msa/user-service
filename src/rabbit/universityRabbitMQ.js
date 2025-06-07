@@ -135,14 +135,14 @@ function consumeMessages() {
 function reply(msg, data) {
   const fullResponse = {
     ...data,
-    correlationId: msg.properties.correlationId,
+    correlationId: msg.properties.correlationId, //data 정보에 correlationId 추가
   };
   console.log(fullResponse);
 
   channel.sendToQueue(
     msg.properties.replyTo, // 요청자가 준 응답용 큐
     Buffer.from(JSON.stringify(fullResponse)), // 응답 데이터
-    { correlationId: msg.properties.correlationId } // 요청-응답 매칭용 ID
+    //{ correlationId: msg.properties.correlationId } // 요청-응답 매칭용 ID
   );
   channel.ack(msg);
 }
