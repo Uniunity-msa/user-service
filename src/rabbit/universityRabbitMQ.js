@@ -35,7 +35,7 @@ function consumeMessages() {
     const university_user = new University_user();
     const result = await university_user.showUniversityNameList();
 
-    console.log(msg, result);
+    //console.log(msg, result);
 
     reply(msg, result);
   });
@@ -47,7 +47,7 @@ function consumeMessages() {
       const partner = new Partner_user();
       const result = await partner.getUniversityID(university_url);
 
-      console.log(msg, result);
+      //onsole.log(msg, result);
 
       reply(msg, result); 
     } catch (err) {
@@ -68,7 +68,7 @@ function consumeMessages() {
       const partner = new Partner_user();
       const result = await partner.getUniversityName(university_url);
 
-      console.log(msg, result);
+      //console.log(msg, result);
 
       reply(msg, result);
     } catch (err) { 
@@ -87,7 +87,7 @@ function consumeMessages() {
       const partner = new Partner_user();
       const result = await partner.getUniversityLocation(university_url);
 
-      console.log(msg, result);
+      //console.log(msg, result);
 
       reply(msg, result);
     } catch (err) {
@@ -137,7 +137,7 @@ function reply(msg, data) {
     ...data,
     correlationId: msg.properties.correlationId, //data 정보에 correlationId 추가
   };
-  console.log(fullResponse);
+  console.log('fullResponse: ', fullResponse);
 
   channel.sendToQueue(
     msg.properties.replyTo, // 요청자가 준 응답용 큐

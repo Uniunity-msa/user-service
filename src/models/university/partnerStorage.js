@@ -28,7 +28,7 @@ class PartnerStorage{
                         return reject(err); // 쿼리 실패
                     }
                     console.log("university_url: ", university_url);
-                    console.log(rows[0]);
+                    console.log("mysql result: ", rows[0]);
                     console.log("unversity_url 입력받아 university_id 보내기\n", rows);
 
                     if (rows.length === 0) {
@@ -152,7 +152,7 @@ class PartnerStorage{
                         return reject(noResultError); // 결과 없음도 오류로 처리
                     }
                     
-                    resolve(rows[0].university_id);
+                    resolve({ university_id: rows[0].university_id });
                 })  
             });     
         })
