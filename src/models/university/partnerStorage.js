@@ -152,7 +152,7 @@ class PartnerStorage{
                         return reject(noResultError); // 결과 없음도 오류로 처리
                     }
                     
-                    resolve(JSON.parse(JSON.stringify(rows[0])));
+                    resolve(rows[0].university_id);
                 })  
             });     
         })

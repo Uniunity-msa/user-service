@@ -134,8 +134,8 @@ function consumeMessages() {
 // 응답 전송 함수 (RPC 방식)
 function reply(msg, data) {
   const fullResponse = {
-    ...data,
-    correlationId: msg.properties.correlationId, //data 정보에 correlationId 추가
+    ...(typeof data === 'object' ? data : { university_id: data }), // data가 객체가 아니라면 객체로 감싸기
+    correlationId: msg.properties.correlationId, // correlationId 추가
   };
   console.log('fullResponse: ', fullResponse);
 
