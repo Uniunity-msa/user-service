@@ -7,7 +7,7 @@ exports.findAllUniversityName = async (req, res) => {
     const university_user = new University_user();
     const response = await university_user.showUniversityNameList();
 
-    console.log(response);
+    //console.log(response);
     return res.json(response);
 };
 

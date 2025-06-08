@@ -9,8 +9,8 @@ exports.authMiddleware = async (req, res, next) => {
     return res.status(401).json({ message: "액세스 토큰 없음" });
   }
 
-  console.log(accessToken);
-  console.log(refreshToken);
+  //console.log(accessToken);
+  //console.log(refreshToken);
 
   try {
     // accessToken이 유효할 경우

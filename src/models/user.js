@@ -143,7 +143,7 @@ class User {
             const client = this.body;
             const userInfo = await UserStorage.getUserInfo(client.user_email);
 
-            console.log(userInfo);
+            //console.log(userInfo);
 
             if (userInfo) { //유저 정보 여부 반환
                 return {  result:false, status: 200, msg: "존재하는 이메일입니다." };
@@ -162,7 +162,7 @@ class User {
             const client = this.body;
             const userInfo = await UserStorage.getUserInfo(client.user_email);
 
-            console.log(userInfo);
+            //console.log(userInfo);
 
             if (userInfo) {
                 return { result: userInfo, status: 200 };

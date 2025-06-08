@@ -115,8 +115,8 @@ module.exports=sendEmailWithAuthorization;
 
 
 if (require.main === module) {
-  // 여기에 테스트용 이메일 주소를 적어줘
+  // 테스트용 이메일 주소
   sendEmailWithAuthorization('20221077@sungshin.ac.kr')
-    .then(code => console.log('✅ 인증 코드 전송 성공:', code))
-    .catch(err => console.error('❌ 에러 발생:', err));
+    .then(code => console.log('인증 코드 전송 성공:', code))
+    .catch(err => console.error('에러 발생:', err));
 }

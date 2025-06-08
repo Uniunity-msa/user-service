@@ -35,7 +35,7 @@ function consumeMessages() {
     const university_user = new University_user();
     const result = await university_user.showUniversityNameList();
 
-    //console.log(msg, result);
+    console.log("SendAllUniversityName: 전체 대학 이름, url, id 반환 => ", result);
 
     reply(msg, result);
   });
@@ -47,7 +47,7 @@ function consumeMessages() {
       const partner = new Partner_user();
       const result = await partner.getUniversityID(university_url);
 
-      //onsole.log(msg, result);
+      console.log("SendUniversityID: university url로 대학 id반환 => ", result);
 
       reply(msg, result); 
     } catch (err) {
@@ -68,7 +68,7 @@ function consumeMessages() {
       const partner = new Partner_user();
       const result = await partner.getUniversityName(university_url);
 
-      //console.log(msg, result);
+      console.log("SendUniversityName: university url로 대학 이름 반환 => ", result);
 
       reply(msg, result);
     } catch (err) { 
@@ -87,7 +87,7 @@ function consumeMessages() {
       const partner = new Partner_user();
       const result = await partner.getUniversityLocation(university_url);
 
-      //console.log(msg, result);
+      console.log("SendUniversityLocation: 대학 url로 위치 정보 반환 => ", result);
 
       reply(msg, result);
     } catch (err) {
@@ -116,7 +116,7 @@ function consumeMessages() {
       const partner = new Partner_user();
       const result = await partner.getUniversityID_name(university_name);
 
-      console.log(msg, result);
+      console.log("SendUniversityIDByName: university 이름으로 id 반환 => ", result);
 
       reply(msg, result);
     } catch (err) {
@@ -137,7 +137,7 @@ function reply(msg, data) {
     ...(typeof data === 'object' ? data : { university_id: data }), // data가 객체가 아니라면 객체로 감싸기
     correlationId: msg.properties.correlationId, // correlationId 추가
   };
-  console.log('fullResponse: ', fullResponse);
+  //console.log('fullResponse: ', fullResponse);
 
   channel.sendToQueue(
     msg.properties.replyTo, // 요청자가 준 응답용 큐

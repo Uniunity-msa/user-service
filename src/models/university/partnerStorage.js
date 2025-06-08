@@ -12,7 +12,7 @@ class PartnerStorage{
             const listResponse = await UniversityStorage.getUniversityNameList();
             const found = listResponse.result.find(u => u.university_url === university_url);
             if (!found) {
-                console.log("university_url: ", university_url);
+                //console.log("university_url: ", university_url);
                 return resolve({ success: false, status: 404, message: '해당 university_url이 존재하지 않습니다.' });
             }
 
@@ -27,9 +27,9 @@ class PartnerStorage{
                         console.error('Query 함수 오류', err);
                         return reject(err); // 쿼리 실패
                     }
-                    console.log("university_url: ", university_url);
-                    console.log("mysql result: ", rows[0]);
-                    console.log("unversity_url 입력받아 university_id 보내기\n", rows);
+                    //console.log("university_url: ", university_url);
+                    //console.log("mysql result: ", rows[0]);
+                    //console.log("unversity_url 입력받아 university_id 보내기\n", rows);
 
                     if (rows.length === 0) {
                         const noResultError = new Error('해당 university_url이 존재하지 않습니다.');
@@ -50,7 +50,7 @@ class PartnerStorage{
             const listResponse = await UniversityStorage.getUniversityNameList();
             const found = listResponse.result.find(u => u.university_url === university_url);
             if (!found) {
-                console.log("university_url: ", university_url);
+                //console.log("university_url: ", university_url);
                 return resolve({ success: false, status: 404, message: '해당 university_url이 존재하지 않습니다.' });
             }
 
@@ -65,8 +65,8 @@ class PartnerStorage{
                         console.error('Query 함수 오류',err);
                         return reject(err)
                     }
-                    console.log("university_url: ", university_url);
-                    console.log("university_url로 university_name받아오기\n", data);
+                    //console.log("university_url: ", university_url);
+                    //console.log("university_url로 university_name받아오기\n", data);
 
                     if (data.length === 0) {
                         const noResultError = new Error('해당 university_url이 존재하지 않습니다.');
@@ -89,7 +89,7 @@ class PartnerStorage{
             const listResponse = await UniversityStorage.getUniversityNameList();
             const found = listResponse.result.find(u => u.university_url === university_url);
             if (!found) {
-                console.log("university_url: ", university_url);
+                //console.log("university_url: ", university_url);
                 return resolve({ success: false, status: 404, message: '해당 university_url이 존재하지 않습니다.' });
             }
 
@@ -105,8 +105,8 @@ class PartnerStorage{
                         return reject(err);
                     }
 
-                    console.log("university_url: ", university_url);
-                    console.log("University 중심좌표 받아오기\n", rows);
+                    //console.log("university_url: ", university_url);
+                    //console.log("University 중심좌표 받아오기\n", rows);
 
                     if (rows.length === 0) {
                         const noResultError = new Error('해당 university_url이 존재하지 않습니다.');
@@ -127,7 +127,7 @@ class PartnerStorage{
             const listResponse = await UniversityStorage.getUniversityNameList();
             const found = listResponse.result.find(u => u.university_name === university_name);
             if (!found) {
-                console.log("university_url: ", university_url);
+                //console.log("university_url: ", university_url);
                 return resolve({ success: false, status: 404, message: '해당 university_name 존재하지 않습니다.' });
             }
 
@@ -143,8 +143,8 @@ class PartnerStorage{
                         return reject(err);
                     }
 
-                    console.log("university_url: ", university_name);
-                    console.log("unversity_name 입력받아 university_id 보내기\n", rows);
+                    //console.log("university_url: ", university_name);
+                    //console.log("unversity_name 입력받아 university_id 보내기\n", rows);
                     
                     if (rows.length === 0) {
                         const noResultError = new Error('해당 university_url이 존재하지 않습니다.');

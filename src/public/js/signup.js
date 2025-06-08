@@ -434,7 +434,7 @@ function register() {
             university_id:universityIdMap.get(selectedValue),
             user_marketing:isCheckedMarketing
         };
-        console.log(req);
+        //console.log(req);
 
         
         fetch(`${apiUrl}/user/register`, {

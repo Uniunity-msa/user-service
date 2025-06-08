@@ -60,7 +60,7 @@ exports.emailAuth = async (req, res) => {
 // 회원 정보 저장
 exports.register = async (req, res) => {
 
-    console.log(req.body);
+    //console.log(req.body);
 
     try {
         const hashedPassword = await bcrypt.hash(req.body.psword, 10)
@@ -104,7 +104,7 @@ exports.modifyPasswordPage = (req, res) => {
     return res.render("modifyPassword.html");
 };
 exports.modifyPassword = async (req, res) => {
-    console.log("비밀번호 변경 요청 바디:", req.body);
+    //console.log("비밀번호 변경 요청 바디:", req.body);
 
     const hashedPassword = await bcrypt.hash(req.body.new_psword, 10)
     const user = new User({
@@ -127,7 +127,7 @@ exports.modifyNickname = async (req, res) => {
         user_email: req.body.user_email,
         user_nickname: req.body.user_nickname,
     });
-    console.log(user);
+    //console.log(user);
 
     const response = await user.modifyNickname();
 
@@ -147,7 +147,7 @@ exports.withdrawal = async (req, res) => {
         user_email: req.body.user_email,
         psword: req.body.psword,
     });
-    console.log(user);
+    //console.log(user);
     const response = await user.withdrawalUser(); // 1. 회원 삭제
 
     // 2. 해당 유저의 모든 Refresh Token 삭제

@@ -11,12 +11,12 @@ exports.loginPage = (req, res) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
-  console.log(email);
+  //console.log(email);
 
   const userModel = new User();
   const user = await userModel.getUserInfo(email);
   
-  console.log(user);
+  //console.log(user);
 
   // 이메일 존재하지 않음
   if (!user.loginStatus) {
