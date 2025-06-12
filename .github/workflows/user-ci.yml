@@ -20,6 +20,15 @@ jobs:
     - name: Set Image Tag (Datetime)
       run: echo "IMAGE_TAG=$(TZ=Asia/Seoul date +'%Y%m%d%H%M')" >> $GITHUB_ENV
 
+    - name: Create mail_token.js from Secret
+      run: |
+        mkdir -p ./user-service/src/config
+        echo "${{ secrets.MAIL_TOKEN }}" > ./user-service/src/config/mail_token.js
+        echo "mail_token.js 파일 생성 완료"
+        echo '${{ secrets.MAIL_CREDENTIALS }}' > ./user-service/src/config/mail_credentials.json
+        echo "mail_credentials.json 파일 생성 완료"
+
+
     - name: Docker Hub Login
       uses: docker/login-action@v3
       with:
