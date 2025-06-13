@@ -34,7 +34,17 @@ jobs:
     
         # mail_credentials.json 작성
         cat <<EOF > ./src/config/mail_credentials.json
-        ${{ secrets.MAIL_CREDENTIALS }}
+        {
+          "web":{
+            "client_id":"742965004576-draoep626ua7nv4he4kj1e73u9112nph.apps.googleusercontent.com",
+            "project_id":"uniunity-455912",
+            "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+            "token_uri":"https://oauth2.googleapis.com/token",
+            "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+            "client_secret": ${{ secrets.CLIENT_SECRET }},
+            "redirect_uris":["http://localhost:3000/oauth2callback"]
+            }
+        }
         EOF
         echo "mail_credentials.json 파일 생성 완료"  
 
