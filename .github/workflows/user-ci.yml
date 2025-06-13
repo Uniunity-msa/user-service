@@ -59,7 +59,7 @@ jobs:
 
     - name: Update kustomization.yaml Image Tag
       run: |
-        cd ./${{ env.SERVICE_NAME }}
+        cd k8s/${{ env.SERVICE_NAME }}
         sed -i "s|name: ${{ env.DOCKERHUB_REPO }}.*|name: ${{ env.DOCKERHUB_REPO }}\n    newTag: ${{ env.IMAGE_TAG }}|" kustomization.yaml
 
     - name: Commit and Push Changes to K8s Repo
