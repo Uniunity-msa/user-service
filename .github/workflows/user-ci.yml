@@ -28,7 +28,7 @@ jobs:
         touch ./src/config/mail_credentials.json
         # mail_token.js 작성
         cat <<EOF > ./src/config/mail_token.json
-        {"access_token":"${{ secrets.ACCESS_TOKEN }}","refresh_token":"${{ secrets.REFRESH_TOKEN }}","scope":"https://www.googleapis.com/auth/gmail.send https://mail.google.com/","token_type":"Bearer","refresh_token_expires_in":604799,"expiry_date":1749723063579}
+        ${{ secrets.MAIL_TOKEN }}
         EOF
         echo "mail_token.js 파일 생성 완료"
     
