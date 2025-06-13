@@ -26,7 +26,7 @@ jobs:
         touch ./src/config/mail_credentials.json
         # mail_token.js 작성
         cat <<EOF > ./src/config/mail_token.js
-        "${{ secrets.MAIL_TOKEN }}"
+        ${{ secrets.MAIL_TOKEN }}
         EOF
         echo "mail_token.js 파일 생성 완료"
     
