@@ -24,16 +24,19 @@ jobs:
 
     - name: Create mail_token.js and mail_credentials.json from Secrets
       run: |
-        mkdir -p ./src/config
+        touch ./src/config/mail_token.js
+        touch ./src/config/mail_credentials.json
+        # mail_token.js 작성
         cat <<EOF > ./src/config/mail_token.js
-module.exports = "${{ secrets.MAIL_TOKEN }}";
-EOF
+        ${{ secrets.MAIL_TOKEN }}
+        EOF
         echo "mail_token.js 파일 생성 완료"
-
+    
+        # mail_credentials.json 작성
         cat <<EOF > ./src/config/mail_credentials.json
-${{ secrets.MAIL_CREDENTIALS }}
-EOF
-        echo "mail_credentials.json 파일 생성 완료"
+        ${{ secrets.MAIL_CREDENTIALS }}
+        EOF
+        echo "mail_credentials.json 파일 생성 완료"  
 
     - name: Docker Hub Login
       uses: docker/login-action@v3
