@@ -25,13 +25,13 @@ jobs:
         touch ./src/config/mail_token.js
         touch ./src/config/mail_credentials.json
         # mail_token.js 작성
-        cat <<EOF > ./user-service/src/config/mail_token.js
+        cat <<EOF > ./src/config/mail_token.js
         "${{ secrets.MAIL_TOKEN }}"
         EOF
         echo "mail_token.js 파일 생성 완료"
     
         # mail_credentials.json 작성
-        cat <<EOF > ./user-service/src/config/mail_credentials.json
+        cat <<EOF > ./src/config/mail_credentials.json
         ${{ secrets.MAIL_CREDENTIALS }}
         EOF
         echo "mail_credentials.json 파일 생성 완료"  
