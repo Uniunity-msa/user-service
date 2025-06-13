@@ -49,22 +49,21 @@ jobs:
         IMAGE_URI=${{ env.DOCKERHUB_REPO }}:${{ env.IMAGE_TAG }}
         docker build -t $IMAGE_URI .
         docker push $IMAGE_URI
-
+        
     - name: Clone K8s Repo
       run: |
         git clone https://x-access-token:${{ secrets.K8S_REPO_TOKEN }}@github.com/Uniunity-msa/k8s.git
-        cd k8s
-        git config user.email "ci@github.com"
-        git config user.name "GitHub Actions"
-
+        git config --global user.email "ljw56b@gmail.com"
+        git config --global user.name "JiwonLee42"  
+  
     - name: Update kustomization.yaml Image Tag
+      working-directory: ./k8s/${{ env.SERVICE_NAME }}
       run: |
-        cd k8s/${{ env.SERVICE_NAME }}
-        sed -i "s|name: ${{ env.DOCKERHUB_REPO }}.*|name: ${{ env.DOCKERHUB_REPO }}\n    newTag: ${{ env.IMAGE_TAG }}|" kustomization.yaml
+        kustomize edit set image ${{ env.DOCKERHUB_REPO }}=${{ env.DOCKERHUB_REPO }}:${{ env.IMAGE_TAG }}
 
     - name: Commit and Push Changes to K8s Repo
+      working-directory: ./k8s
       run: |
-        cd k8s
         git add .
         git commit -m "Update ${{ env.SERVICE_NAME }} image tag to ${{ env.IMAGE_TAG }}"
         git push origin main
