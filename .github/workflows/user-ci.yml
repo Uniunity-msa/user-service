@@ -26,11 +26,11 @@ jobs:
       run: |
         touch ./src/config/mail_token.json
         touch ./src/config/mail_credentials.json
-        # mail_token.js 작성
+        # mail_token.json 작성
         cat <<EOF > ./src/config/mail_token.json
         ${{ secrets.MAIL_TOKEN }}
         EOF
-        echo "mail_token.js 파일 생성 완료"
+        echo "mail_token.json 파일 생성 완료"
     
         # mail_credentials.json 작성
         cat <<EOF > ./src/config/mail_credentials.json
